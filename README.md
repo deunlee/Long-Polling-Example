@@ -3,7 +3,7 @@ Here is a simple long-polling example implemented as a Node.JS.
 
 Node.JS로 구현한 간단한 롱폴링 예제입니다.
 
-I implemented just HTTP without express.
+I implemented just HTTP without Express.
 But with simple modifications, you can use it with Express.
 
 # Run
