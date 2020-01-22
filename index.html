@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Long Polling Example</title>
+</head>
+
+<body>
+	<h1>Long Polling Example :</h1>
+	<ul id="contents">
+	</ul>
+</body>
+
+<script>
+	function longPoll() {
+		console.log('Waiting for long-polling...');
+
+		const xhr = new XMLHttpRequest();
+		// In some browsers, 
+		// calling the same url from multiple tabs 
+		// sometimes results in missing responses.
+		// So I modified it to call it with random number.
+		xhr.open('GET', './long-polling?' + Math.random(), true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === xhr.DONE) {
+				if (xhr.status === 200 || xhr.status === 201) {
+					console.log('Response: ' + xhr.responseText);
+					appendMessage(xhr.responseText);
+					longPoll();
+				} else {
+					// console.error(xhr);
+					reconnect();
+				}
+			}
+		};
+		xhr.send();
+	}
+
+	function reconnect() {
+		console.log('Error! Try again in 3 seconds...');
+		setTimeout(function() {
+			longPoll();
+		}, 3000);
+	}
+
+	function appendMessage(msg) {
+		const message = document.createElement('li');
+		const text    = document.createTextNode(msg);
+		message.appendChild(text);
+		document.getElementById('contents').appendChild(message);
+	}
+
+	longPoll(); // start long polling
+</script>
+</html>
