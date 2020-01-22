@@ -1,7 +1,7 @@
 # Long-Polling-Example
-Here is a simple long-polling example implemented as a Node.JS.
+This is a simple long-polling example implemented as a Node.js.
 
-Node.JS로 구현한 간단한 롱폴링 예제입니다.
+Node.js로 구현한 간단한 롱폴링 예제입니다.
 
 I implemented just HTTP without Express.
 But with simple modifications, you can use it with Express.
