@@ -18,11 +18,8 @@
 		console.log('Waiting for long-polling...');
 
 		const xhr = new XMLHttpRequest();
-		// In some browsers, 
-		// calling the same url from multiple tabs 
-		// sometimes results in missing responses.
-		// So I modified it to call it with random number.
-		xhr.open('GET', './long-polling?' + Math.random(), true);
+		// In some browsers, calling the same url from multiple tabs sometimes results in missing responses.
+		xhr.open('GET', './long-polling?' + Date.now() + '-' + Math.random(), true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === xhr.DONE) {
 				if (xhr.status === 200 || xhr.status === 201) {
@@ -52,6 +49,6 @@
 		document.getElementById('contents').appendChild(message);
 	}
 
-	longPoll(); // start long polling
+	longPoll(); // Start the long polling
 </script>
 </html>
